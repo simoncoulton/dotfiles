@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+brew install node yarn || brew upgrade node yarn
+npm install -g npm-check tldr fkill-cli vtop

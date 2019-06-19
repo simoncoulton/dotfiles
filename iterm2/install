@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+brew cask install iterm2
+brew install TomAnthony/brews/itermocil
+
+mkdir -p mkdir $HOME/.itermocil
+ln -sf $HOME/.dotfiles/iterm2/profiles/com.googlecode.iterm2.plist $HOME/Library/Preferences
+
+echo "To install custom themes navigate to $PWD/themes and load them into iTerm2"

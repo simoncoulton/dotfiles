@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+VIM_ROOT=$HOME/.vim
+VUNDLES_FILE=vundles.vim
+VUNDLES_PATH=$VIM_ROOT/$VUNDLES_FILE
+VIM_BUNDLES_ROOT=$VIM_ROOT/bundle
+brew install vim || brew upgrade vim
+mkdir -p $VIM_BUNDLES_ROOT
+mkdir -p $VIM_ROOT/colors
+mkdir -p $VIM_ROOT/autoload
+git clone https://github.com/VundleVim/Vundle.vim.git $VIM_BUNDLES_ROOT/Vundle.vim
+
+ln -sf $PWD/$VUNDLES_FILE $VUNDLES_PATH
+vim --noplugin -u $VUNDLES_PATH -N +set hidden +syntax on +BundleClean +PluginInstall! +qall
+
+for f in $(find "$PWD"/colors -maxdepth 1 -type f -name \*.vim) ; do
+    ln -sf $f $VIM_ROOT/colors
+done
+
+for f in $(find $PWD/autoload/* -d -maxdepth 0) ; do
+    ln -sf $f "$VIM_ROOT/autoload/$(basename $f)"
+done
+
+ln -sf $PWD/.vimrc $HOME/.vimrc

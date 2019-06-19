@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+DEFAULT_NAME="$(id -un)"
+
+git_user_details () {
+    read -p "Enter your name [$DEFAULT_NAME]: " name
+    name=${name:-${DEFAULT_NAME}}
+    read -p "Enter your email: " email
+    read -p "Are these details correct, name: $name, email: $email (y/n)? " cont
+    if [ "$cont" = "y" ]; then
+        echo "[user]
+            name = $name
+            email = $email" >> ~/.gitconfig.user
+    else
+        git_user_details
+    fi
+}
+
+git_user_details
+
+ln -sf $PWD/.gitconfig ~/.gitconfig
+ln -sf $PWD/.gitignore ~/.gitignore_global
+
+brew install git || brew upgrade git

@@ -1,0 +1,50 @@
+#!/usr/bin/env python
+import os
+import platform
+import subprocess
+import sys
+
+if sys.version_info >= (3, 0):
+    input_method = input
+else:
+    input_method = raw_input
+
+available_options = ["fonts", "brew", "ruby", "python", "node",
+                     "git", "iterm2", "vim", "zsh"]
+if platform.system() == "Darwin":
+    available_options.append("osx")
+available_actions = ("install", "uninstall")
+
+
+def select_option(action):
+    option = input_method("What would you like to " + action + "? [all]: ")
+    if option and option not in available_options:
+        return select_option()
+    if not option:
+        option = available_options
+    return option
+
+
+def main(action, *args):
+    if action not in available_actions:
+        print("You must select either install or uninstall.")
+        return
+    if not len(args) or (args and args[0] not in available_options):
+        try:
+            options = select_option(action)
+        except KeyboardInterrupt:
+            print("\nCancelled.")
+            return
+    else:
+        options = [arg for arg in args if arg in available_options]
+    root = os.path.dirname(os.path.realpath(__file__))
+    for option in options:
+        process = "./" + action
+        os.chdir(option)
+        subprocess.call(process, shell=True)
+        os.chdir(root)
+
+
+if __name__ == "__main__":
+    sys.argv.pop(0)
+    main(*sys.argv)

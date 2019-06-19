@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+ZROOTDIR=~/.zsh
+ZSOURCEDIR=$ZROOTDIR/sources
+
+mkdir -p $ZROOTDIR 
+touch "$HOME/.zsh_history"
+brew install zsh || brew upgrade zsh
+
+ZPREZTODIR="$HOME/.zprezto"
+OLDWD=$PWD
+if [ -d "$ZPREZTODIR" ] 
+then
+    cd $ZPREZTODIR
+    git pull
+    git submodule update --init --recursive
+    cd $OLDWD
+else
+    git clone --recursive https://github.com/sorin-ionescu/prezto.git "$ZPREZTODIR"
+fi
+
+ln -sf $PWD/sources $ZSOURCEDIR
+touch $ZSOURCEDIR/user.aliases.zsh
+touch $ZSOURCEDIR/user.plugins.zsh
+touch $ZSOURCEDIR/user.hooks.zsh
+touch $ZSOURCEDIR/user.exports.zsh
+ln -sf $PWD/.zshrc ~/.zshrc
+for f in $(find "$ZPREZTODIR"/runcoms -maxdepth 1 -type f \! -name \*.md) ; do
+    ln -sf $f "$HOME/$(basename ${f})"
+done
+ln -sf $PWD/.zpreztorc ~/.zpreztorc
+
+ZSH="$(which zsh)"
+sudo cp $ZSH /bin/zsh
+sudo chsh -s /bin/zsh

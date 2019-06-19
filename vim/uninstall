@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+VIM_ROOT=$HOME/.vim
+brew uninstall vim
+rm -rf $VIM_ROOT

@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+rm -rf /Applications/iTerm.app
+brew cask uninstall --force iterm2

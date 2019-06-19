@@ -1,0 +1,5 @@
+[settings]
+[settings.virtualenvs]
+create = false
+in-project = false
+name = '.env'

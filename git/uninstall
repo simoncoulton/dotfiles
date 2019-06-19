@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+rm -f ~/.gitignore_global ~/.gitconfig ~/.gitconfig.user
