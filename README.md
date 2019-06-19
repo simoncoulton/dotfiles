@@ -20,7 +20,7 @@ Minimalistic development dotfiles for an unobtrustive experience with sensible d
 - git
 - iterm2
 - node
-- osx
+- macos
 - python
 - ruby
 - vim

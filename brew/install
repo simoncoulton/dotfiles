@@ -1,14 +1,18 @@
 #!/usr/bin/env bash
 
+source ../helpers.sh
+section "Configuring homebrew..."
+
 BREWS="vim fasd direnv htop"
 
 if [[ $(command -v brew) == "" ]]; then 
-    echo "Installing Homebrew.."
-    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-    brew install $BREWS
+    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" &>/dev/null
+    brew install $BREWS &>/dev/null
+    complete "Installed homebrew"
 else
     echo "Updating and cleaning up Homebrew.."
-    brew update
-    brew cleanup
-    brew upgrade $BREWS
+    brew update &>/dev/null
+    brew cleanup &>/dev/null
+    brew upgrade $BREWS &>/dev/null
+    complete "Updated homebrew"
 fi

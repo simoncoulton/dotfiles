@@ -1,4 +1,9 @@
 #!/usr/bin/env bash
 
+source ../helpers.sh
+section "Configuring fonts..."
+
 cp ./*.ttf $HOME/Library/Fonts
 cp ./*.otf $HOME/Library/Fonts
+
+complete "Installed Fira* fonts"

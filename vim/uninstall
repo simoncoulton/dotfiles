@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
 
+source ../helpers.sh
+
+info "Uninstalling vim"
+
 VIM_ROOT=$HOME/.vim
-brew uninstall vim
+brew uninstall vim &>/dev/null
 rm -rf $VIM_ROOT
+rm -rf $HOME/.vimrc
+
+complete "Uninstalled vim"

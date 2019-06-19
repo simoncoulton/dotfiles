@@ -1,3 +1,9 @@
 #!/usr/bin/env bash
 
+source ../helpers.sh
+
+info "Uninstalling Ruby"
+
 rm -f ~/.gemrc
+
+complete "Uninstalled Ruby"

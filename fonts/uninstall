@@ -1,4 +1,10 @@
 #!/usr/bin/env bash
 
+source ../helpers.sh
+
+info "Uninstalling fonts"
+
 rm $HOME/Library/Fonts/Fira*.ttf
 rm $HOME/Library/Fonts/Fira*.otf
+
+complete "Removed Fira* fonts"

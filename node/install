@@ -1,4 +1,11 @@
 #!/usr/bin/env bash
 
-brew install node yarn || brew upgrade node yarn
-npm install -g npm-check tldr fkill-cli vtop
+source ../helpers.sh
+
+section "Configuring Node..."
+
+brew install node yarn &>/dev/null || brew upgrade node yarn &>/dev/null
+complete "Installed node and yarn"
+
+npm install -g npm-check tldr fkill-cli vtop &>/dev/null
+complete "Installed npm-check, tldr, fkill and vtop"

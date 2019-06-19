@@ -1,3 +1,9 @@
 #!/usr/bin/env bash
 
+source ../helpers.sh
+
+info "Uninstalling zsh"
+
 rm -rf ~/.zsh ~/.zshrc ~./zprezto ~/.zsh_history
+
+complete "Uninstalled zsh"

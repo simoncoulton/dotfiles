@@ -1,17 +1,22 @@
 #!/usr/bin/env bash
 
+source ../helpers.sh
+section "Configuring vim..."
+
 VIM_ROOT=$HOME/.vim
 VUNDLES_FILE=vundles.vim
 VUNDLES_PATH=$VIM_ROOT/$VUNDLES_FILE
 VIM_BUNDLES_ROOT=$VIM_ROOT/bundle
-brew install vim || brew upgrade vim
+brew install vim &>/dev/null || brew upgrade vim &>/dev/null
+complete "Installed vim"
 mkdir -p $VIM_BUNDLES_ROOT
 mkdir -p $VIM_ROOT/colors
 mkdir -p $VIM_ROOT/autoload
-git clone https://github.com/VundleVim/Vundle.vim.git $VIM_BUNDLES_ROOT/Vundle.vim
+git clone https://github.com/VundleVim/Vundle.vim.git $VIM_BUNDLES_ROOT/Vundle.vim &>/dev/null
 
 ln -sf $PWD/$VUNDLES_FILE $VUNDLES_PATH
 vim --noplugin -u $VUNDLES_PATH -N +set hidden +syntax on +BundleClean +PluginInstall! +qall
+complete "Installed vim plugins"
 
 for f in $(find "$PWD"/colors -maxdepth 1 -type f -name \*.vim) ; do
     ln -sf $f $VIM_ROOT/colors
@@ -22,3 +27,4 @@ for f in $(find $PWD/autoload/* -d -maxdepth 0) ; do
 done
 
 ln -sf $PWD/.vimrc $HOME/.vimrc
+complete "Linked .vimrc"

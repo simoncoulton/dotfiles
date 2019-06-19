@@ -1,23 +1,29 @@
 #!/usr/bin/env bash
 
+source ../helpers.sh
+section "Configuring zsh..."
+
 ZROOTDIR=~/.zsh
 ZSOURCEDIR=$ZROOTDIR/sources
 
 mkdir -p $ZROOTDIR 
 touch "$HOME/.zsh_history"
-brew install zsh || brew upgrade zsh
+brew install zsh &>/dev/null || brew upgrade zsh &>/dev/null
+
+complete "Installed zsh"
 
 ZPREZTODIR="$HOME/.zprezto"
 OLDWD=$PWD
 if [ -d "$ZPREZTODIR" ] 
 then
     cd $ZPREZTODIR
-    git pull
-    git submodule update --init --recursive
+    git pull &>/dev/null
+    git submodule update --init --recursive &>/dev/null
     cd $OLDWD
 else
-    git clone --recursive https://github.com/sorin-ionescu/prezto.git "$ZPREZTODIR"
+    git clone --recursive https://github.com/sorin-ionescu/prezto.git "$ZPREZTODIR" &>/dev/null
 fi
+complete "Installed zprezto"
 
 ln -sf $PWD/sources $ZSOURCEDIR
 touch $ZSOURCEDIR/user.aliases.zsh
@@ -29,7 +35,9 @@ for f in $(find "$ZPREZTODIR"/runcoms -maxdepth 1 -type f \! -name \*.md) ; do
     ln -sf $f "$HOME/$(basename ${f})"
 done
 ln -sf $PWD/.zpreztorc ~/.zpreztorc
+complete "Linked zsh sources"
 
 ZSH="$(which zsh)"
-sudo cp $ZSH /bin/zsh
-sudo chsh -s /bin/zsh
+sudo cp $ZSH /bin/zsh &>/dev/null
+sudo chsh -s /bin/zsh &>/dev/null
+complete "Set zsh as shell"

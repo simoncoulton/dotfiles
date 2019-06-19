@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-echo "Setting sensible Finder defaults..."
+source ../helpers.sh
+
+section "Configuring MacOS defaults..."
 defaults write com.apple.finder DisableAllAnimations -bool true
 defaults write com.apple.finder NewWindowTarget -string "PfDe"
 defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/Desktop/"
@@ -13,5 +15,7 @@ defaults write com.apple.finder ShowPathbar -bool true
 defaults write com.apple.finder AppleShowAllFiles YES
 defaults write com.apple.finder DSDontWriteNetworkStores -bool TRUE
 defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+complete "Set sensible defaults"
 
 killall Finder
+complete "Restarted Finder"

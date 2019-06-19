@@ -1,3 +1,10 @@
 #!/usr/bin/env bash
 
-rm -rf ~/.config/pypoetry
+source ../helpers.sh
+
+info "Uninstalling Python 3"
+
+rm -rf ~/.config/pypoetry ~/.venv ~/.envrc
+brew uninstall python3 &>/dev/null
+
+complete "Uninstalled Python 3"

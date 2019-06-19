@@ -1,4 +1,10 @@
 #!/usr/bin/env bash
 
+source ../helpers.sh
+
+info "Uninstalling iTerm2"
+
 rm -rf /Applications/iTerm.app
-brew cask uninstall --force iterm2
+brew cask uninstall --force iterm2 &>/dev/null
+
+complete "Uninstalled iTerm2"

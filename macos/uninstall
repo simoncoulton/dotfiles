@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+source ../helpers.sh
+
+info "Uninstalling MacOS defaults"
+
+defaults delete com.apple.finder DisableAllAnimations &>/dev/null
+defaults delete com.apple.finder NewWindowTarget &>/dev/null
+defaults delete com.apple.finder NewWindowTargetPath &>/dev/null
+defaults delete com.apple.finder ShowExternalHardDrivesOnDesktop &>/dev/null
+defaults delete com.apple.finder ShowHardDrivesOnDesktop &>/dev/null
+defaults delete com.apple.finder ShowMountedServersOnDesktop &>/dev/null
+defaults delete com.apple.finder ShowRemovableMediaOnDesktop &>/dev/null
+defaults delete com.apple.finder ShowStatusBar &>/dev/null
+defaults delete com.apple.finder ShowPathbar &>/dev/null
+defaults delete com.apple.finder AppleShowAllFiles &>/dev/null
+defaults delete com.apple.finder DSDontWriteNetworkStores &>/dev/null
+defaults delete NSGlobalDomain AppleShowAllExtensions &>/dev/null
+
+killall Finder
+
+complete "Uninstalled MacOS defaults"

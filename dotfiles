@@ -12,7 +12,7 @@ else:
 available_options = ["fonts", "brew", "ruby", "python", "node",
                      "git", "iterm2", "vim", "zsh"]
 if platform.system() == "Darwin":
-    available_options.append("osx")
+    available_options.append("macos")
 available_actions = ("install", "uninstall")
 
 
@@ -21,6 +21,8 @@ def select_option(action):
     if option and option not in available_options:
         return select_option()
     if not option:
+        if action == "uninstall":
+            available_options.reverse()
         option = available_options
     return option
 
