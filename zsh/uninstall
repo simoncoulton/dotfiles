@@ -5,5 +5,6 @@ source ../helpers.sh
 info "Uninstalling zsh"
 
 rm -rf ~/.zsh ~/.zshrc ~./zprezto ~/.zsh_history
+chsh -s /bin/bash &>/dev/null
 
 complete "Uninstalled zsh"

@@ -39,5 +39,5 @@ complete "Linked zsh sources"
 
 ZSH="$(which zsh)"
 sudo cp $ZSH /bin/zsh &>/dev/null
-sudo chsh -s /bin/zsh &>/dev/null
+chsh -s /bin/zsh &>/dev/null
 complete "Set zsh as shell"
