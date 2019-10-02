@@ -14,8 +14,11 @@ complete "Set Poetry defaults"
 ln -sf $PWD/.envrc $HOME/.envrc
 complete "Set ~/ direnv .envrc"
 
-pip3 install boto3 awscli ssh-docker poetry flake8 autopep8 &>/dev/null
+pip3 install boto3 awscli ssh-docker flake8 autopep8 &>/dev/null
 complete "Installed Python 3 system wide packages"
+
+curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python3
+complete "Installed Poetry"
 
 python3 -m venv ~/.venv --symlinks --system-site-packages &>/dev/null
 complete "Created default virtualenv at ~/.venv"

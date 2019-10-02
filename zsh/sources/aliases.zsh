@@ -7,6 +7,7 @@ alias it="itermocil"
 alias dks="docker kill $(docker ps -q)"
 alias dkrmc="docker rm $(docker ps -a -q)"
 alias de="docker exec -it $1 $2"
+alias drmi="docker images | grep none | awk '{ print $3; }' | xargs docker rmi"
 
 pyclean () {
     find . -type f -name "*.py[co]" -delete
