@@ -3,7 +3,7 @@
 source ../helpers.sh
 section "Configuring homebrew..."
 
-BREWS="vim fasd direnv htop"
+BREWS="vim fasd direnv htop thefuck"
 
 if [[ $(command -v brew) == "" ]]; then 
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" &>/dev/null
