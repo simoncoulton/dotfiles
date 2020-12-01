@@ -13,7 +13,7 @@ alias dsp="docker system prune -a"
 alias dvp="docker volume prune"
 alias dps="docker ps"
 
-alias codep="find . -iname *\.code-workspace -exec code {} \;"
+alias codep="find . -maxdepth 1 -iname *\.code-workspace -exec code {} \;"
 
 # To get around https://github.com/sdispater/poetry/issues/536
 alias poetry="python3 $HOME/.poetry/bin/poetry"
