@@ -150,3 +150,11 @@
 
 [include]
 	path = .gitconfig.user
+
+[includeIf "gitdir:~/Sites/"]
+	path = ~/.gitconfig-user-bespohk
+
+[includeIf "gitdir:~/Sites/coviu.com/"]
+	path = ~/.gitconfig-user-coviu
+[url "git@github.com:"]
+	insteadOf = git://github.com/

@@ -16,7 +16,7 @@ alias dps="docker ps"
 alias codep="find . -maxdepth 1 -iname *\.code-workspace -exec code {} \;"
 
 # To get around https://github.com/sdispater/poetry/issues/536
-alias poetry="python3 $HOME/.poetry/bin/poetry"
+alias poetry="$HOME/Library/Application\ Support/pypoetry/venv/bin/poetry"
 alias fh="fuck --hard"
 alias fy="fuck --yeah"
 
