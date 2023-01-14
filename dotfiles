@@ -1,52 +1,30 @@
-#!/usr/bin/env python
-import os
-import platform
-import subprocess
-import sys
+options=(fonts brew ruby rust python node git iterm2 vim zsh starship lvim vscode)
 
-if sys.version_info >= (3, 0):
-    input_method = input
-else:
-    input_method = raw_input
+mainmenu() {
+    echo "Manage dotfiles"
+    for t in ${!options[@]}; do
+        i="$((t + 1))"
+        echo "$i) ${options[$t]}" 
+    done
+    action="./$1"
+    echo "Choose an item to $1, or 'all': "
 
-available_options = ["fonts", "brew", "ruby", "python", "node",
-                     "git", "iterm2", "vim", "zsh"]
-if platform.system() == "Darwin":
-    available_options.append("macos")
-available_actions = ("install", "uninstall")
+    read -r opt
+    i="$((opt - 1))"
+    if [[ ${options[$i]} ]]; then
+        item=${options[$i]}
+        cd "./$item"
+        sh $action
+        cd ..
+    elif [[ $opt == "all" ]]; then
+        for t in ${options[@]}; do
+            cd "./$t"
+            sh $action
+            cd ..
+        done
+    else
+        mainmenu $1
+    fi
+}
 
-
-def select_option(action):
-    option = input_method("What would you like to " + action + "? [all]: ")
-    if option and option not in available_options:
-        return select_option()
-    if not option:
-        if action == "uninstall":
-            available_options.reverse()
-        option = available_options
-    return option
-
-
-def main(action, *args):
-    if action not in available_actions:
-        print("You must select either install or uninstall.")
-        return
-    if not len(args) or (args and args[0] not in available_options):
-        try:
-            options = select_option(action)
-        except KeyboardInterrupt:
-            print("\nCancelled.")
-            return
-    else:
-        options = [arg for arg in args if arg in available_options]
-    root = os.path.dirname(os.path.realpath(__file__))
-    for option in options:
-        process = "./" + action
-        os.chdir(option)
-        subprocess.call(process, shell=True)
-        os.chdir(root)
-
-
-if __name__ == "__main__":
-    sys.argv.pop(0)
-    main(*sys.argv)
+mainmenu $1

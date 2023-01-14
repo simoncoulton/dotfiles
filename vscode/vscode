@@ -1,0 +1,31 @@
+#!/bin/bash
+
+workspaces=(*.code-workspace)
+
+IFS=$'\n'
+found_workspaces=($(find . -maxdepth 1 -iname "*.code-workspace"))
+unset IFS
+
+if [[ $# -eq "1" ]]; then
+    code $1
+    exit
+elif [ "${#found_workspaces[@]}" -eq 0 ]; then
+    code .
+    exit
+elif [ "${#found_workspaces[@]}" -eq 1 ]; then
+    echo "Opening ${found_workspaces[0]}..."
+    code ${found_workspaces[0]}
+    exit
+fi
+
+PS3='Select workspace to open, or 0 to exit: '
+select file in "${workspaces[@]}"; do
+    if [[ $REPLY == "0" ]]; then
+        exit
+    elif [[ -z $file ]]; then
+        echo 'Invalid workspace selection, try again' >&2
+    else
+        code $file
+        break
+    fi
+done

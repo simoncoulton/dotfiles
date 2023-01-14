@@ -1,23 +1,31 @@
 #!/usr/bin/env bash
-
 source ../helpers.sh
 section "Configuring zsh..."
 
 ZROOTDIR=~/.zsh
 ZSOURCEDIR=$ZROOTDIR/sources
+ZPLUGINSDIR=$ZROOTDIR/plugins
 
 mkdir -p $ZROOTDIR 
 touch "$HOME/.zsh_history"
 brew install zsh &>/dev/null || brew upgrade zsh &>/dev/null
 
+git clone --depth 1 -- https://github.com/marlonrichert/zsh-autocomplete.git ./plugins/zsh-autocomplete
+git clone --depth 1 -- https://github.com/zsh-users/zsh-syntax-highlighting.git ./plugins/zsh-syntax-highlighting
+git clone --depth 1 -- https://github.com/zsh-users/zsh-autosuggestions.git ./plugins/zsh-autosuggestions
+
 complete "Installed zsh"
 
-ln -sf $PWD/sources $ZSOURCEDIR
+ln -sf $PWD/sources $ZROOTDIR
+ln -sf $PWD/plugins $ZROOTDIR
+
 touch $ZSOURCEDIR/user.aliases.zsh
 touch $ZSOURCEDIR/user.plugins.zsh
 touch $ZSOURCEDIR/user.hooks.zsh
 touch $ZSOURCEDIR/user.exports.zsh
+
 ln -sf $PWD/.zshrc ~/.zshrc
+
 complete "Linked zsh sources"
 
 ZSH="$(which zsh)"

@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+source ../helpers.sh
+section "Installing Rust..."
+
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+complete "Installed Rust"

@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+source ../helpers.sh
+section "Removing starship..."
+
+brew uninstall starship &>/dev/null
+rm -rf $HOME/.config/starship.toml
+
+complete "Uninstalled starship"

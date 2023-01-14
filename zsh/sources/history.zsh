@@ -1,3 +1,4 @@
+# No longer required, using fzf
 # if [ -z "$HISTFILE" ]; then
 #   HISTFILE=$HOME/.zsh_history
 # fi

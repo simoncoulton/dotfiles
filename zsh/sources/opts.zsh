@@ -1,0 +1,1 @@
+setopt auto_cd
