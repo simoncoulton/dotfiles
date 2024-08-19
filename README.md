@@ -8,14 +8,12 @@ Minimalistic development dotfiles and bootstrapping for an unobtrustive experien
 2. `cd ~/.dotfiles`
 3. `./dotfiles install
 
+You can also install items individually with `./dotfiles install [component]`
+
 ## Removing
 
 2. `cd ~/.dotfiles`
 3. `./dotfiles uninstall
-
-# Customising ZSH
-
-Add your customisations to `~/.zsh/sources/user.*.zsh` and reload your terminal.
 
 # Thanks
 
