@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+source "../utils.sh"
+
+python_ini="python.ini"
+
+# install required python versions
+python_versions=($(extract_lines_from_section $python_ini "versions"))
+for python_version in "${python_versions[@]}"; do
+    pyenv install "$python_version"
+done
+
+pyenv global "${python_versions[0]}"
+
+# install PDM
+curl -sSL https://pdm-project.org/install-pdm.py | python3 -

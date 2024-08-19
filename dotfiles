@@ -1,7 +1,147 @@
-options=(fonts brew ruby rust python node git iterm2 vim zsh starship lvim vscode)
+#!/bin/bash
+
+source "utils.sh"
+
+rootdir=$(pwd)
+
+brew_install_or_ugprade() {
+    local package="$1"
+    local cask="$2"
+
+    echo "Installing brew $item..."
+    if [ -z "$2" ]; then
+        brew install "$package" || brew upgrade "$package"
+    else
+        brew install --cask "$package" || brew upgrade "$package"
+    fi
+}
+
+brew_uninstall() {
+    local package="$1"
+
+    echo "Removing brew $item..."
+
+    brew uninstall "$package"
+}
+
+do_action() {
+    local package="$2"
+    local path="$rootdir/$package"
+    local action="$1"
+    local ini_path="${path}/${package}.ini"
+
+    if [ ! -d "$path" ]; then
+        echo "Unable to $action $package, not found."
+        return 1
+    fi
+
+    if [ -e "$ini_path" ]; then
+        # install any other dependencies
+        dependencies=($(extract_lines_from_section "$ini_path" "dependencies"))
+        for dependency in "${dependencies[@]}"; do
+            # only install dependencies, we don't want to remove ones that may still
+            # be in use...
+            if [ "$action" == "install" ]; then
+                do_action "$action" "$dependency"
+            fi
+        done
+    fi
+
+    cd "$path"
+
+    # pre
+    if [ "$action" == "install" ] && [ -e "preinstall" ]; then
+        sh "./preinstall"
+    fi
+
+    if [ "$action" == "uninstall" ] && [ -e "preuninstall" ]; then
+        sh "./preuninstall"
+    fi
+
+    if [ -e "$ini_path" ]; then
+        # brew
+        brews=($(extract_lines_from_section "$ini_path" "brews"))
+        casks=($(extract_lines_from_section "$ini_path" "casks"))
+
+        for item in "${brews[@]}"; do
+            if [ "$action" == "install" ]; then
+                brew_install_or_ugprade "$item"
+            else
+                brew_uninstall "$item"
+            fi
+        done
+
+        for item in "${casks[@]}"; do
+            if [ "$action" == "install" ]; then
+                brew_install_or_ugprade "$item" true
+            else
+                brew_uninstall "$item"
+            fi
+        done
+    fi
+
+    if [ "$action" == "install" ] && [ -e "install" ]; then
+        sh "./install"
+    fi
+
+    if [ "$action" == "uninstall" ] && [ -e "uninstall" ]; then
+        sh "./uninstall"
+    fi
+
+    # post
+    if [ "$action" == "uninstall" ] && [ -e "postuninstall" ]; then
+        sh "./postuninstall"
+    fi
+
+    # stow
+    if [ -e "$ini_path" ]; then
+        value=$(get_ini_value "$ini_path" "stow")
+
+        cd "$rootdir" # cd back to root dotfiles dir to use stow
+
+        if [ "$value" = "true" ]; then
+            if [ "$action" == "install" ]; then
+                stow "$package"
+            else
+                stow --delete "$package"
+            fi
+        fi
+    fi
+
+    cd "$path"
+
+    if [ "$action" == "install" ] && [ -e "postinstall" ]; then
+        sh "./postinstall"
+    fi
+
+    cd "$rootdir"
+}
 
 mainmenu() {
+    if [ -z "$1" ]; then
+        echo "You must provide either 'install' or 'uninstall'"
+        exit 1
+    fi
+
+    if [ "$1" == "setup" ]; then
+        do_action "install" "brew"
+    fi
+
+    if [ -n "$1" ] && [ -n "$2" ]; then
+        do_action "$1" "$2"
+        exit 1
+    fi
+
     echo "Manage dotfiles"
+    options=()
+
+    for dir in "$rootdir"/*/; do
+        if [ -d "$dir" ]; then
+            dir_name=$(basename "$dir")
+            options+=("$dir_name")
+        fi
+    done
+
     for t in ${!options[@]}; do
         i="$((t + 1))"
         echo "$i) ${options[$t]}" 
@@ -13,18 +153,14 @@ mainmenu() {
     i="$((opt - 1))"
     if [[ ${options[$i]} ]]; then
         item=${options[$i]}
-        cd "./$item"
-        sh $action
-        cd ..
+        do_action "$1" "$item"
     elif [[ $opt == "all" ]]; then
         for t in ${options[@]}; do
-            cd "./$t"
-            sh $action
-            cd ..
+            do_action "$action" "$t"
         done
     else
-        mainmenu $1
+        mainmenu $@
     fi
 }
 
-mainmenu $1
+mainmenu $@

@@ -1,11 +1,3 @@
 #!/usr/bin/env bash
-source ./brews.sh
-source ../helpers.sh
-
-info "Uninstalling homebrew"
-
-brew uninstall $BREWS
 
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall)" &>/dev/null
-
-complete "Uninstalled homebrew"

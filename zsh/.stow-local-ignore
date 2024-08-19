@@ -1,0 +1,12 @@
+# macOS
+\.DS_Store
+
+# configs
+zsh.ini
+
+# common
+preinstall
+install
+uninstall
+postinstall
+postuninstall

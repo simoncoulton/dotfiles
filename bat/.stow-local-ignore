@@ -1,0 +1,13 @@
+# macOS
+\.DS_Store
+
+# configs
+bat.ini
+
+# common
+preinstall
+install
+uninstall
+postinstall
+postuninstall
+postinstall

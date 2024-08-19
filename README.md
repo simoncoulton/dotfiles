@@ -1,6 +1,6 @@
 # README
 
-Minimalistic development dotfiles for an unobtrustive experience with sensible defaults.
+Minimalistic development dotfiles and bootstrapping for an unobtrustive experience with sensible defaults.
 
 ## Installation
 
@@ -12,21 +12,6 @@ Minimalistic development dotfiles for an unobtrustive experience with sensible d
 
 2. `cd ~/.dotfiles`
 3. `./dotfiles uninstall
-
-### Installing individual components
-
-- brew
-- fonts
-- git
-- iterm2
-- node
-- macos
-- python
-- ruby
-- vim
-- zsh
-
-These can be installed/uninstalled manually via `./dotfiles [install|uninstall] [component]`.
 
 # Customising ZSH
 

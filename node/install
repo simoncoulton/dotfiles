@@ -1,11 +1,3 @@
 #!/usr/bin/env bash
 
-source ../helpers.sh
-
-section "Configuring Node..."
-
-brew install node yarn &>/dev/null || brew upgrade node yarn &>/dev/null
-complete "Installed node and yarn"
-
-npm install -g npm-check tldr fkill-cli vtop &>/dev/null
-complete "Installed npm-check, tldr, fkill and vtop"
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash

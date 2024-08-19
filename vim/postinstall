@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+VIM_ROOT=$HOME/.vim
+VUNDLES_FILE=vundles.vim
+VUNDLES_PATH=$VIM_ROOT/$VUNDLES_FILE
+VIM_BUNDLES_ROOT=$VIM_ROOT/bundle
+
+git clone https://github.com/VundleVim/Vundle.vim.git $VIM_BUNDLES_ROOT/Vundle.vim &>/dev/null
+
+vim --noplugin -u $VUNDLES_PATH -N +set hidden +syntax on +BundleClean +PluginInstall! +qall

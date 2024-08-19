@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+LOCAL_BIN="$HOME/.local/bin"
+
+mkdir -p $LOCAL_BIN
+ln -s $PWD/vscode $LOCAL_BIN/vscode

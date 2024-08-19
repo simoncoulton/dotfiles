@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-
-source ../helpers.sh
-
-info "Uninstalling git"
-
-rm -f ~/.gitignore_global ~/.gitconfig ~/.gitconfig.user
-
-complete "Removed git configurations"

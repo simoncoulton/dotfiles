@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+NEW_ZSH=$(which zsh)
+
+if ! grep -Fxq "$NEW_ZSH" /etc/shells; then
+    sudo sh -c "echo $NEW_ZSH >> /etc/shells"
+fi
+
+chsh -s $NEW_ZSH

@@ -1,0 +1,15 @@
+# macOS
+\.DS_Store
+
+# configs
+vscode.ini
+
+# bins
+vscode
+
+# common
+preinstall
+install
+uninstall
+postinstall
+postuninstall

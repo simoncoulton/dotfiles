@@ -1,16 +1,12 @@
 export ZSH="${ZDOTDIR:-$HOME}/.zsh"
-export ZSH_SOURCES="$ZSH/sources"
-export ZSH_PLUGINS="$ZSH/plugins"
 
-eval "$(starship init zsh)"
+local includes=("core" "aliases" "exports" "hooks" "plugins" "others")
 
-for f in $(find "$ZSH_SOURCES/" -maxdepth 1 -type f -name \*.zsh) ; do
-    source $f
+for f in "${includes[@]}"; do
+    local zsh_source="$ZSH/$f"
+    for f in $(find -L "$zsh_source" -maxdepth 1 -type f -name \*.zsh) ; do
+        source "$f"
+    done 
 done
 
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$HOME/.local/bin:$PATH"
-export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin:$HOME/.cargo/bin"
-
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="~/.sdkman"
-[[ -s "~/.sdkman/bin/sdkman-init.sh" ]] && source "~/.sdkman/bin/sdkman-init.sh"
+## Everything below this is auto generated and can be removed...

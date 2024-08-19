@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+deno uninstall serve
+rm -rf ~/.deno

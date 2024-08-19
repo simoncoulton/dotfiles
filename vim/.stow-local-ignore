@@ -1,0 +1,12 @@
+# macOS
+\.DS_Store
+
+# configs
+vim.ini
+
+# common
+preinstall
+install
+uninstall
+postinstall
+postuninstall

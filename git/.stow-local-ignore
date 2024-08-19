@@ -1,0 +1,12 @@
+# macOS
+\.DS_Store
+
+# configs
+git.ini
+
+# common
+preinstall
+install
+uninstall
+postinstall
+postuninstall

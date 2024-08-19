@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+source "../utils.sh"
+
+node_ini="node.ini"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
+node_versions=($(extract_lines_from_section $node_ini "versions"))
+for node_version in "${node_versions[@]}"; do
+    nvm install "$node_version"
+done
+
+nvm use "${node_versions[0]}"
+
+global_npm_packages=($(extract_lines_from_section $node_ini "npm_packages"))
+for global_npm_package in "${global_npm_packages[@]}"; do
+    npm i -g "$global_npm_package"
+done
