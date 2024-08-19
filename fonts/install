@@ -1,4 +1,0 @@
-#!/usr/bin/env bash
-
-cp ./*.ttf $HOME/Library/Fonts
-cp ./*.otf $HOME/Library/Fonts
