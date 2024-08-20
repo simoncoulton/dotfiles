@@ -1,15 +1,18 @@
 return {
-	"SmiteshP/nvim-navic",
-	dependencies = {
-		"LunarVim/breadcrumbs.nvim",
-	},
-	config = function()
-		require("nvim-navic").setup({
-			lsp = {
-				auto_attach = true,
-			},
-		})
+  "SmiteshP/nvim-navic",
+  dependencies = {
+    "neovim/nvim-lspconfig",
+  },
+  config = function()
+    local navic = require("nvim-navic")
 
-		require("breadcrumbs").setup()
-	end,
+    navic.setup({
+      lsp = {
+        auto_attach = true,
+      },
+      highlight = true,
+    })
+
+    vim.o.winbar = "%{%v:lua.require'nvim-navic'.get_location()%}"
+  end,
 }

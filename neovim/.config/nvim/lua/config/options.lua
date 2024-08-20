@@ -28,3 +28,4 @@ opts.hlsearch = true
 
 opts.ignorecase = true
 opts.smartcase = true
+

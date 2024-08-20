@@ -3,6 +3,7 @@
 
 # configs
 spicetify.ini
+.gitignore
 
 # common
 preinstall
