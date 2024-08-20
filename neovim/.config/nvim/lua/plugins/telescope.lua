@@ -56,24 +56,26 @@ return {
 						require("telescope.themes").get_dropdown({}),
 					},
 				},
-				-- buffers = {
-				-- 	mappings = {
-				-- 		i = {
-				-- 			["<C-b>"] = actions.delete_buffer,
-				-- 		},
-				-- 		n = {
-				-- 			["<C-b>"] = actions.delete_buffer,
-				-- 		},
-				-- 	},
-				-- 	previewer = false,
-				-- 	initial_mode = "normal",
-				-- 	layout_config = {
-				-- 		height = 0.4,
-				-- 		width = 0.6,
-				-- 		prompt_position = "top",
-				-- 		preview_cutoff = 120,
-				-- 	},
-				-- },
+				pickers = {
+					buffers = {
+						mappings = {
+							i = {
+								["<c-d>"] = actions.delete_buffer,
+							},
+							n = {
+								["<c-d>"] = actions.delete_buffer,
+							},
+						},
+						previewer = false,
+						initial_mode = "normal",
+						layout_config = {
+							height = 0.4,
+							width = 0.6,
+							prompt_position = "top",
+							preview_cutoff = 120,
+						},
+					},
+				},
 			})
 			require("telescope").load_extension("ui-select")
 		end,
