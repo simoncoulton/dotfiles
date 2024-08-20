@@ -18,7 +18,5 @@ return {
         null_ls.builtins.formatting.isort,
       },
     })
-
-    vim.keymap.set("n", "<leader>fm", vim.lsp.buf.format, {})
   end,
 }
