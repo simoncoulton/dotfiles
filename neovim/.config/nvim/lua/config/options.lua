@@ -8,7 +8,7 @@ opts.shiftwidth = 2
 
 opts.number = true
 opts.relativenumber = true
-opts.signcolumn = "number"
+opts.signcolumn = "yes:1"
 
 opts.clipboard = "unnamed"
 
