@@ -3,6 +3,9 @@ return {
     "catppuccin/nvim",
     name = "catppuccin",
     priority = 1000,
+    opts = {
+      transparent = true,
+    },
     config = function()
       vim.cmd.colorscheme("catppuccin-frappe")
       require("catppuccin").setup({})

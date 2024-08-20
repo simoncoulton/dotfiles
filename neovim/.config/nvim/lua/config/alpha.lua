@@ -10,7 +10,7 @@ dashboard.section.header.val = {}
 dashboard.section.buttons.val = {
   dashboard.button("f", "  Find file", "<cmd>lua require('telescope.builtin').find_files()<CR>"),
   dashboard.button("e", "  New file", ":ene <BAR> startinsert <CR>"),
-  dashboard.button("r", "  Recently used files", ":Telescope oldfiles <CR>"),
+  dashboard.button("r", "  Recently used files", "<cmd>lua require('telescope.builtin').oldfiles()<CR>"),
   dashboard.button("s", "  Last session", "<cmd>lua require('persistence').load({ last = true })<CR>"),
   dashboard.button("c", "  Configuration", ":e ~/.config/nvim/init.lua<CR>"),
   dashboard.button("q", "󱓞  Quit Neovim", ":qa<CR>"),
