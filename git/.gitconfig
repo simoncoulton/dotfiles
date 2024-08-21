@@ -158,11 +158,5 @@
 [include]
 	path = .gitconfig.user
 
-[includeIf "gitdir:~/Sites/"]
-	path = ~/.gitconfig-user-bespohk
-
-[includeIf "gitdir:~/Sites/coviu.com/"]
-  path = ~/.gitconfig-user-coviu
-
 [init]
 	defaultBranch = master
