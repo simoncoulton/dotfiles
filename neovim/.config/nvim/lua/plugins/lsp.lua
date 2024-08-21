@@ -19,6 +19,7 @@ return {
       require("config.lsps.keymaps")
       require("config.lsps.configs.lua")
       require("config.lsps.configs.tsserver")
+      require("config.lsps.configs.flow")
     end,
   },
 }
