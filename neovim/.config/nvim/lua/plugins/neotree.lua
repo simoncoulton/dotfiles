@@ -11,8 +11,8 @@ return {
 		filesystem = {
 			filtered_items = {
 				show_hidden_count = false,
-        visible = true,
-        hide_dotfiles = false,
+				visible = true,
+				hide_dotfiles = false,
 				never_show = {
 					".DS_Store",
 				},
@@ -23,6 +23,15 @@ return {
 				with_expanders = true,
 				expander_collapsed = "",
 				expander_expanded = "",
+			},
+		},
+		event_handlers = {
+
+			{
+				event = "file_open_requested",
+				handler = function()
+					require("neo-tree.command").execute({ action = "close" })
+				end,
 			},
 		},
 	},
