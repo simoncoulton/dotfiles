@@ -10,3 +10,5 @@ for f in "${includes[@]}"; do
 done
 
 ## Everything below this is auto generated and can be removed...
+
+export PATH=$PATH:/Users/simoncoulton/.spicetify

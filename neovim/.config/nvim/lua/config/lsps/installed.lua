@@ -1,4 +1,4 @@
 return {
   "lua_ls",
-  "tsserver"
+  "ts_ls"
 }
