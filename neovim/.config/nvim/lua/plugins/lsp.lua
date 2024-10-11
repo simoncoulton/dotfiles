@@ -1,3 +1,5 @@
+local installed = require("config.lsps.installed")
+
 return {
   {
     "williamboman/mason.nvim",
@@ -9,17 +11,17 @@ return {
     "williamboman/mason-lspconfig.nvim",
     config = function()
       require("mason-lspconfig").setup({
-        ensure_installed = require("config.lsps.installed"),
+        ensure_installed = installed,
       })
     end,
   },
   {
     "neovim/nvim-lspconfig",
     config = function()
+      for _, name in ipairs(installed) do
+        require("config.lsps.configs." .. name)
+      end
       require("config.lsps.keymaps")
-      require("config.lsps.configs.lua")
-      require("config.lsps.configs.ts_ls")
-      require("config.lsps.configs.flow")
     end,
   },
 }
