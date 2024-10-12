@@ -12,5 +12,7 @@ done
 
 pyenv global "${python_versions[0]}"
 
-# install PDM
-curl -sSL https://pdm-project.org/install-pdm.py | python3 -
+global_pypi_packages=($(extract_lines_from_section $python_ini "pypi_packages"))
+for global_pypi_package in "${global_pypi_packages[@]}"; do
+    pip install "$global_pypi_package"
+done
