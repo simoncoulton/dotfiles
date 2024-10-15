@@ -37,7 +37,7 @@ config.tab_max_width = 100
 
 config.use_fancy_tab_bar = false;
 
-config.window_decorations = "RESIZE"
+config.window_decorations = "TITLE | RESIZE"
 
 config.window_background_opacity = 0.9
 config.macos_window_background_blur = 10
