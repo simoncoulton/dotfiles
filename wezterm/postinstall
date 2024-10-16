@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+cp WezTerm.icns /Applications/WezTerm.app/Contents/Resources/terminal.icns
